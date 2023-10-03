@@ -1,4 +1,4 @@
-name: Generate snake animation
+name: Generate and commit snake.svg to main
 
 on:
   schedule: # execute every 12 hours
@@ -10,40 +10,26 @@ on:
       - main
   
 jobs:
-  generate:
+  generate_and_commit:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: generate snake.svg
         uses: Platane/snk/svg-only@v2
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: dist/snake.svg
 
-      - name: Create and switch to a new branch
+      - name: Configure Git
         run: |
-          git checkout -b svg-branch
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Commit and push snake.svg
+        run: |
           git add dist/snake.svg
-          git commit -m "Add snake.svg"
-          git push origin svg-branch
-
-      - name: Create a pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          base: main
-          head: svg-branch
-          title: "Add snake.svg"
-          labels: "automated"
-
-      - name: Merge pull request
-        if: success()
-        run: |
-          TOKEN="${{ secrets.GITHUB_TOKEN }}"
-          PR_NUMBER=$(jq -r .number "$GITHUB_EVENT_PATH")
-          API_URL="https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/merge"
-          echo "Merging pull request $PR_NUMBER"
-          RESPONSE=$(curl -X PUT -H "Authorization: token $TOKEN" -H "Content-Type: application/json" "$API_URL")
-          echo "$RESPONSE"
+          git commit -m "Update snake.svg"
+          git push origin main
