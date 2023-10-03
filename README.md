@@ -290,7 +290,7 @@ src="https://raw.githubusercontent.com/DeveshYadav13/DeveshYadav13/master/Resour
 <!-- 3D Contri Graph © https://github.com/yoshi389111--> 
 # [<img alt = "3D Contri-Graph" src="https://raw.githubusercontent.com/DeveshYadav13/DeveshYadav13/master/profile-3d-contrib/profile-night-rainbow.svg" width = 600>](https://github.com/DeveshYadav13)
 
-<img src="https://raw.githubusercontent.com/DeveshYadav13/DeveshYadav13/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/DeveshYadav13/DeveshYadav13/dist/snake.svg" alt="Snake animation" />
 
 ###
 
